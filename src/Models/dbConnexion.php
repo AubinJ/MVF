@@ -5,9 +5,9 @@ namespace  Models;
 class DbConnexion
 {
     private $host   = "localhost";
-    private $login  = "mvf";
-    private $pass   = "mvf";
-    private $bdd    = "mvf";
+    private $login  = "festivalv2";
+    private $pass   = "festivalv2";
+    private $bdd    = "festivalv2";
     private $pdo;
 
     function __construct()
