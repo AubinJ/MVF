@@ -1,3 +1,7 @@
+<?php
+echo "Bonjour, monde !";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
