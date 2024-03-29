@@ -5,7 +5,7 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'mvf');
 define('DB_USER', 'mvf');
 define('DB_PWD', 'mvf');
-define('PREFIXE', 'cine_');
+// define('PREFIXE', 'cine_');
 
 // Si le nom de domaine ne pointe pas vers le dossier public, indiquer le chemin entre le nom de domaine et le dossier public.
 // exemple: /mon-site/public/
