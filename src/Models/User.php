@@ -2,8 +2,7 @@
 
 namespace Models;
 
-use DateTime;
-use src\Services\Hydratation;
+
 
 class User
 {
@@ -26,18 +25,27 @@ class User
      * @param int $id       L'id de l'utilisateur si on le connait, sinon rien.
      */
 
-    function __construct(string $nom, string $prenom, string $mail, int $tel, string $adresse, string $password, int|string $id = "à créer")
+
+    function __construct(array $datas)
     {
-
-        $this->setId($id);
-        $this->setNom($nom);
-        $this->setPrenom($prenom);
-        $this->setMail($mail);
-
-        $this->setTel($tel);
-        $this->setAdresse($adresse);
-        $this->setPassword($password);
+        foreach ($datas as $key => $value) {
+            $this->$key = $value;
+        }
     }
+
+
+    // function __construct(string $nom, string $prenom, string $mail, int $tel, string $adresse, string $password, int|string $id = "à créer")
+    // {
+
+    //     $this->setId($id);
+    //     $this->setNom($nom);
+    //     $this->setPrenom($prenom);
+    //     $this->setMail($mail);
+
+    //     $this->setTel($tel);
+    //     $this->setAdresse($adresse);
+    //     $this->setPassword($password);
+    // }
 
     public function getId(): int
     {
@@ -45,11 +53,8 @@ class User
     }
     public function setId(int|string $id): void
     {
-        if (is_string($id) && $id === "à créer") {
-            $this->_id = $this->CreerNouvelId();
-        } else {
-            $this->_id = $id;
-        }
+
+        $this->_id = $id;
     }
     public function getNom(): string
     {
