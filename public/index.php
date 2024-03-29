@@ -1,6 +1,13 @@
 <?php
-echo "Bonjour, monde !";
+require __DIR__ . "/../src/init.php";
+
 ?>
+
+
+
+<!-- <?php
+        echo "Bonjour, monde !";
+        ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,12 +26,12 @@ echo "Bonjour, monde !";
 
 </head>
 
-<body>
+<body> -->
 
 
-    <!------------------- BODY ------------------->
+<!------------------- BODY ------------------->
 
-    <form action="./src/traitement.php" id="inscription" method="POST">
+<!-- <form action="./src/traitement.php" id="inscription" method="POST">
 
 
 
@@ -35,4 +42,4 @@ echo "Bonjour, monde !";
 <script src="./assets/script.js"></script>
 <script src="./assets/traitement.js"></script>
 
-</html>
+</html> -->

@@ -1,4 +1,7 @@
 <?php
+
+use src\Models\Database;
+
 require_once __DIR__ . '/autoload.php';
 
 // On démarre la session :
@@ -8,7 +11,7 @@ session_start();
 require_once __DIR__ . "/../config.php";
 
 if (DB_INITIALIZED == FALSE) {
-    $db = new src\Models\DbConnexion();
+    $db = new Database();
     echo $db->initialisationBDD();
 }
 
