@@ -2,8 +2,8 @@
 
 namespace src\Repositories;
 
-use Models\place;
-use src\Models\Film;
+use src\Models\place;
+
 use PDO;
 use src\Models\Database;
 
@@ -42,7 +42,7 @@ class PlaceRepository
 
     public function getThisPlaceById($id): Place
     {
-        $sql = $this->concatenationRequete("WHERE " . PREFIXE . "Place.ID = :id");
+        $sql = $this->concatenationRequete("WHERE Place.ID = :id");
 
         $statement = $this->DB->prepare($sql);
         $statement->bindParam(':id', $id);

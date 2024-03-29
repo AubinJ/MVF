@@ -1,16 +1,16 @@
 <?php
 
-namespace Repositories;
+namespace src\Repositories;
 
-
+use src\Models\Database;
 
 class NuitManager
 {
     private $pdo;
 
-    public function __construct(DbConnexion $dbConnexion)
+    public function __construct(Database $database)
     {
-        $this->pdo = $dbConnexion->getPDO();
+        $this->pdo = $database->getPDO();
     }
 
     public function getallNuit()
@@ -57,11 +57,4 @@ class NuitManager
             return;
         }
     }
-
-
-       
-    }
-
-
-        
 }
