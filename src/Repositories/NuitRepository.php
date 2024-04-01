@@ -60,11 +60,4 @@ class NuitManager
             return;
         }
     }
-
-
-       
-    }
-
-
-        
 }

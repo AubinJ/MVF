@@ -3,15 +3,15 @@
 namespace Repositories;
 
 use PDO;
-use Models\DbConnexion;
+
 
 use Models\User;
-
+use Models\Database as ModelsDatabase;
 
 final class UserRepository
 {
     private $pdo;
-    public function __construct(DbConnexion $dbConnexion)
+    public function __construct(ModelsDatabase $dbConnexion)
     {
         $this->pdo = $dbConnexion->getPDO();
     }

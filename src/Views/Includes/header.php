@@ -1,13 +1,17 @@
 <?php
-require __DIR__ . "/../src/init.php";
+session_start();
+
+if (!isset($_SESSION['connectéUser'])) {
+    header('location: connexion.php');
+    die;
+}
+
+require_once "src/classes/Reservation.php";
+require_once "src/classes/User.php";
+require_once "src/classes/Database.php";
+
 
 ?>
-
-
-
-<!-- <?php
-        echo "Bonjour, monde !";
-        ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,7 +21,7 @@ require __DIR__ . "/../src/init.php";
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire de réservation Music Vercos Festival</title>
+    <title>Page Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
@@ -26,20 +30,10 @@ require __DIR__ . "/../src/init.php";
 
 </head>
 
-<body> -->
+<body>
 
-
-<!------------------- BODY ------------------->
-
-<!-- <form action="./src/traitement.php" id="inscription" method="POST">
-
-
-
-
-    </form>
-
-</body>
-<script src="./assets/script.js"></script>
-<script src="./assets/traitement.js"></script>
-
-</html> -->
+    <!------------------- HEADER ------------------->
+    <header class="header">
+        <a href="./deconnexion.php" class="boutonConnexion">Déconnexion</a>
+        <h1>Vercors Musique Festival</h1>
+    </header>
