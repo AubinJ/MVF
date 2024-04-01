@@ -1,16 +1,19 @@
 <?php
 
-namespace src\Repositories;
+namespace Repositories;
+
 
 use src\Models\Database;
+
+
 
 class NuitManager
 {
     private $pdo;
 
-    public function __construct(Database $database)
+    public function __construct(DbConnexion $dbConnexion)
     {
-        $this->pdo = $database->getPDO();
+        $this->pdo = $dbConnexion->getPDO();
     }
 
     public function getallNuit()
