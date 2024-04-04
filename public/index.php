@@ -1,13 +1,7 @@
 <?php
 require __DIR__ . "/../src/init.php";
-
 ?>
 
-
-
-<!-- <?php
-        echo "Bonjour, monde !";
-        ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -26,12 +20,11 @@ require __DIR__ . "/../src/init.php";
 
 </head>
 
-<body> -->
+<body>
 
+    <!------------------- BODY ------------------->
 
-<!------------------- BODY ------------------->
-
-<!-- <form action="./src/traitement.php" id="inscription" method="POST">
+    <!-- <form action="./src/traitement.php" id="inscription" method="POST">
 
 
 
