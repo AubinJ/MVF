@@ -1,105 +1,65 @@
 <?php
-// include __DIR__ ."/../src/Services/Fonction.php";
-use src\Controllers\FilmController;
-use src\Controllers\HomeController;
-use src\Services\Routing;
 
-$NuitController = new NuitController;
-$FilmController = new FilmController;
+use src\Controllers\HomeController;
+use src\Controllers\ReservationController;
+use src\Services\Auth;
 
 $route = $_SERVER['REDIRECT_URL'];
-var_dump($route)
-// $methode = $_SERVER['REQUEST_METHOD'];
-// $routeComposee = Routing::routeComposee($route);
+$method = $_SERVER['REQUEST_METHOD'];
 
+$homeController = new HomeController();
+$ReservationController = new ReservationController();
 
-// switch ($route) {
-//     case HOME_URL:
-//         if (isset($_SESSION['connecté'])) {
-//             header('location: ' . HOME_URL . 'dashboard');
-//             die;
-//         } else {
-//             $HomeController->index();
-//         }
-//         break;
+switch ($route) {
 
-//     case HOME_URL . 'connexion':
-//         if (isset($_SESSION['connecté'])) {
-//             header('location: /dashboard');
-//             die;
-//         } else {
-//             if ($methode === 'POST') {
-//                 $HomeController->auth($_POST['password']);
-//             } else {
-//                 $HomeController->index();
-//             }
-//         }
-//         break;
+    case HOME_URL:
+        if ($method === 'GET') {
+            if (Auth::isAuth()) {
+                header('Location: ' . HOME_URL . 'dashboard');
+                die();
+            } else {
+                $homeController->index();
+            }
+        } else if ($method === 'POST') {
+            $ReservationController->registerReseversation();
+        }
 
-//     case HOME_URL . 'deconnexion':
-//         $HomeController->quit();
-//         break;
+        break;
 
-//     case $routeComposee[0] == "dashboard":
-//         if (isset($_SESSION["connecté"])) {
-//             // On a ici toutes les routes qu'on a à partir du dashboard
+    case HOME_URL . 'dashboard':
+        if (!Auth::isAuth()) {
+            header('Location: ' . HOME_URL);
+            die();
+        } else {
+            $homeController->dashboard();
+        }
+        break;
 
-//             switch ($route) {
-//                 case $routeComposee[1] == "films":
-//                     // On a ici toutes les routes qu'on peut faire pour les films
-//                     switch ($route) {
-//                         case $routeComposee[2] == "new":
-//                             if ($methode === "POST") {
-//                                 $data = $_POST;
-//                                 $FilmController->save($data);
-//                             } else {
-//                                 $FilmController->new();
-//                             }
-//                             break;
+    case HOME_URL . 'login':
+        if ($method === 'POST') {
+            $pass = $_POST['password'];
+            $email = $_POST['email'];
+            Auth::login($pass, $email);
+        } else {
+            if (Auth::isAuth()) {
+                header('Location: ' . HOME_URL . 'dashboard');
+                die();
+            } else {
+                $homeController->login();
+            }
+        }
+        break;
 
-//                         case $routeComposee[2] == 'details':
-//                             $idFilm = end($routeComposee);
-//                             $FilmController->show($idFilm);
-//                             break;
+    case HOME_URL . 'logout':
+        Auth::logout();
+        die();
+        break;
 
-//                         case $routeComposee[2] == "edit":
-//                             $idFilm = end($routeComposee);
-//                             $FilmController->edit($idFilm);
-//                             break;
+    case HOME_URL . 'receipt':
+        $homeController->receipt();
+        break;
 
-//                         case $routeComposee[2] == "update":
-//                             if ($methode === "POST") {
-//                                 $idFilm = end($routeComposee);
-//                                 $data = $_POST;
-//                                 $FilmController->save($data, $idFilm);
-//                             }
-//                             break;
-
-//                         case $routeComposee[2] == "delete":
-//                             $idFilm = end($routeComposee);
-//                             $FilmController->delete($idFilm);
-//                             break;
-
-//                         default:
-//                             // par défaut on voit la liste des films.
-//                             $FilmController->index();
-//                             break;
-//                     }
-
-//                     break;
-
-//                 default:
-//                     // par défaut une fois connecté, on voit la liste des films.
-//                     $FilmController->index();
-//                     break;
-//             }
-//         } else {
-//             header("location: " . HOME_URL);
-//             die;
-//         }
-//         break;
-
-//     default:
-//         $HomeController->page404();
-//         break;
-// }
+    default:
+        $homeController->notFound();
+        break;
+}
