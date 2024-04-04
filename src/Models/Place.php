@@ -14,7 +14,7 @@ class place
     private $Id_reservation;
 
 
-    use Services\Hydratation;
+
 
 
 

@@ -10,6 +10,8 @@ final class Database
 
     private $DB;
     private $Config;
+    private $pdo;
+
 
     public function __construct()
     {
@@ -103,5 +105,9 @@ final class Database
             fclose($fconfig);
             return false;
         }
+    }
+    public function getPDO()
+    {
+        return $this->pdo;
     }
 }

@@ -4,8 +4,9 @@ namespace src\Controllers;
 
 use DateTime;
 use DateTimeZone;
+use Models\User;
 use src\Models\Reservation;
-use src\Models\User;
+
 use src\Repositories\ReservationRepository;
 use src\Repositories\UserRepository;
 
@@ -42,31 +43,31 @@ final class ReservationController
     {
         $newReservation = new Reservation();
         $newReservation->setNombreReservation($_POST['nombrePlaces']);
-        $newReservation->setPrixTotal($this->calculateTotalPrice());
-        $newReservation->setPassSelection($_POST['passSelection']);
-        if (isset($_POST['emplacementTente'])) {
-            $newReservation->setEmplacementTente(implode(',', $_POST['emplacementTente']));
-        }
-        if (isset($_POST['emplacementVan'])) {
-            $newReservation->setEmplacementVan(implode(',', $_POST['emplacementVan']));
-        }
-        $newReservation->setCasques($_POST['nombreCasquesEnfants']);
-        $newReservation->setLuges($_POST['NombreLugesEte']);
+        // $newReservation->setPrixTotal($this->calculateTotalPrice());
+        // $newReservation->setPassSelection($_POST['passSelection']);
+        // if (isset($_POST['emplacementTente'])) {
+        //     $newReservation->setEmplacementTente(implode(',', $_POST['emplacementTente']));
+        // }
+        // if (isset($_POST['emplacementVan'])) {
+        //     $newReservation->setEmplacementVan(implode(',', $_POST['emplacementVan']));
+        // }
+        // $newReservation->setCasques($_POST['nombreCasquesEnfants']);
+        // $newReservation->setLuges($_POST['NombreLugesEte']);
 
-        if (!isset($_SESSION['connected']) || !$_SESSION['connected']) {
+        // if (!isset($_SESSION['connected']) || !$_SESSION['connected']) {
 
-            echo 'Session is not set. Fetching ID by mail.';
-            if ($this->registerUser() == 'success') {
-                $userRepo = new UserRepository();
-                $user = $userRepo->getByMail($_POST['email']);
-                $newReservation->setIdUtilisateur($user->ID);
-            }
-        } else if (isset($_SESSION['userId'])) {
-            $newReservation->setIdUtilisateur($_SESSION['userId']);
-        }
-        $resaRepo = new ReservationRepository();
-        $newReservationID = $resaRepo->create($newReservation);
-        header('Location: ' . HOME_URL . 'receipt?id=' . $newReservationID);
+        //     echo 'Session is not set. Fetching ID by mail.';
+        //     if ($this->registerUser() == 'success') {
+        //         $userRepo = new UserRepository();
+        //         $user = $userRepo->getByMail($_POST['email']);
+        //         $newReservation->setIdUtilisateur($user->ID);
+        //     }
+        // } else if (isset($_SESSION['userId'])) {
+        //     $newReservation->setIdUtilisateur($_SESSION['userId']);
+        // }
+        // $resaRepo = new ReservationRepository();
+        // $newReservationID = $resaRepo->create($newReservation);
+        // header('Location: ' . HOME_URL . 'receipt?id=' . $newReservationID);
     }
 
     public function calculateTotalPrice()
