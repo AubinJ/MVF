@@ -4,6 +4,7 @@ namespace src\Repositories;
 
 use PDO;
 use PDOException;
+use src\Models\Database;
 use src\Models\Reservation;
 
 

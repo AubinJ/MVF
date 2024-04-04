@@ -13,7 +13,7 @@ class Reservation
     private int $Id_User;
 
 
-    function __construct(array $datas)
+    function __construct(array $datas = [])
     {
         foreach ($datas as $key => $value) {
             $this->$key = $value;

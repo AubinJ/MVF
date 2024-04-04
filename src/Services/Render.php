@@ -18,6 +18,6 @@ trait Render
         if (!isset($action)) {
             $action = '';
         }
-        include_once __DIR__ . '/src/Views/' . $view . '.php';
+        include_once __DIR__ . '/../Views/' . $view . '.php';
     }
 }

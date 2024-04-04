@@ -1,18 +1,3 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['connectéUser'])) {
-    header('location: connexion.php');
-    die;
-}
-
-require_once "src/classes/Reservation.php";
-require_once "src/classes/User.php";
-require_once "src/classes/Database.php";
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -25,15 +10,16 @@ require_once "src/classes/Database.php";
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/style.css">
-    <link rel="stylesheet" href="./assets/responsive.css">
-
+    <link rel="stylesheet" href="./assets/css/style.css"">
+    <link rel=" stylesheet" href="./assets/css/responsive.css">
+    <script src="assets/js/script" defer></script>
+    <script src="assets/js/traitement.js " defer></script>
 </head>
 
 <body>
 
     <!------------------- HEADER ------------------->
     <header class="header">
-        <a href="./deconnexion.php" class="boutonConnexion">Déconnexion</a>
-        <h1>Vercors Musique Festival</h1>
+        <a href="./connexion.php" class="boutonConnexion">Déconnexion</a>
+        <h1>Vercors Musique FestivalN</h1>
     </header>
