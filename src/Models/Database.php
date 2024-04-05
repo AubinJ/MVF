@@ -5,22 +5,39 @@ namespace src\Models;
 use PDO;
 use PDOException;
 
-final class Database
+class Database
 {
-
     private $DB;
-    private $Config;
+    private $config;
     private $pdo;
 
 
     public function __construct()
     {
-        $this->Config = __DIR__ . '/../../config.php';
-        require_once $this->Config;
-        $this->ConnexionDB();
+        $this->config = __DIR__ . '/../../config.php';
+        require_once $this->config;
+
+        $this->connexionDB();
+
+        $host = 'localhost';
+        $dbname = 'mvf';
+        $user = 'mvf';
+        $password = 'mvf';
+
+        try {
+            $this->pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
     }
 
-    private function ConnexionDB()
+    public function getDB()
+    {
+        return $this->DB;
+    }
+
+    private function connexionDB(): void
     {
         try {
             $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
@@ -28,11 +45,6 @@ final class Database
         } catch (PDOException $error) {
             echo "Quelque chose s'est mal passé : " . $error->getMessage();
         }
-    }
-
-    public function getDB()
-    {
-        return $this->DB;
     }
 
     /**
@@ -49,7 +61,7 @@ final class Database
         }
         // Télécharger le fichier sql d'initialisation dans la BDD
         try {
-            $sql = file_get_contents(__DIR__ . "/../Migrations/Vercors_BDD.sql");
+            $sql = file_get_contents(__DIR__ . "/../migration/MVF.sql");
 
             $this->DB->query($sql);
             // Mettre à jour le fichier config.php
@@ -82,7 +94,7 @@ final class Database
     private function MiseAJourConfig(): bool
     {
 
-        $fconfig = fopen($this->Config, 'w');
+        $fconfig = fopen($this->config, 'w');
 
         $contenu = "<?php
     // lors de la mise en open source, remplacer les infos concernant la base de données.
